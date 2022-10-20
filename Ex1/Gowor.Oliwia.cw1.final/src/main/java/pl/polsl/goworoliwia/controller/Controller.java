@@ -9,27 +9,35 @@ import java.util.List;
 import java.util.Scanner;
 import pl.polsl.goworoliwia.model.Buyer;
 import pl.polsl.goworoliwia.model.Date;
-import pl.polsl.goworoliwia.model.IncorrectDataFormatException;
 import pl.polsl.goworoliwia.model.Order;
+import pl.polsl.goworoliwia.model.OrderNotFoundException;
 import pl.polsl.goworoliwia.model.OrdersList;
 import pl.polsl.goworoliwia.model.Product;
 import pl.polsl.goworoliwia.view.View;
 
 /**
  * Controller class of the application responsible for interacting with user and
- * modifying model
+ * modifying model.
  *
  * @author Oliwia Gowor
+ * @version 1.0
  */
 public class Controller {
 
+    /**
+     * Value represents object of the View class.
+     */
     private View view;
+    /**
+     * Value represents object of the OrdersList class.
+     */
     private OrdersList model;
 
     /**
+     * Controller class constructor.
      *
-     * @param view
-     * @param model
+     * @param view represents the View class
+     * @param model represents the OrdersList class
      */
     public Controller(View view, OrdersList model) {
         this.view = view;
@@ -37,48 +45,109 @@ public class Controller {
     }
 
     /**
-     * Method for writing out the parameters.
+     * Method responsilbe for running the program – it checks the parameters and
+     * runs appropriate menu based on them.
      *
      * @param args program call parameters
      */
-    public static void readParameters(String[] args) {
-        int numberOfParameters = args.length;
-        if (args.length > 0) {
-            System.out.println("Program parameters: ");
-
-            for (int i = 0; i < numberOfParameters; i++) {
-                System.out.println("parameter " + (i + 1) + ":" + args[i]);
+    public void runProgram(String[] args) {
+        if (!this.getParameters(args)) {
+            String[] parameters = getParametersFormUser();
+            while (!validateParameters(parameters)) {
+                parameters = getParametersFormUser();
+                view.printErrorParameters();
+            }
+            if (parameters[1].equals("admin")) {
+                this.mainMenu();
+            } else if (parameters[1].equals("viewer")) {
+                this.viewerMenu();
+            } else {
+                view.printErrorRunProgram();
             }
         } else {
-            getParametersFormUser();
+            if (args[1] == "admin") {
+                this.mainMenu();
+            } else if (args[1] == "viewer") {
+                this.viewerMenu();
+            } else {
+                view.printErrorRunProgram();
+            }
         }
     }
 
     /**
-     * Method for getting the parameters from user.
+     * Method for checking and writing out the program parameters.
+     *
+     * @param args program call parameters
+     * @return true if parameters are correct, false if they are incorrect.
      */
-    public static String getParametersFormUser() {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Enter program parameters: ");
-        String parameter = scanner.next();
-        return parameter;
+    private Boolean getParameters(String[] args) {
+        if (validateParameters(args)) {
+            view.printParameters(args);
+            return true;
+        } else {
+            return false;
+        }
     }
 
     /**
+     * Method for getting the program parameters from user.
      *
-     * @return
+     * @return parameters given by user
      */
-    public static int getIntFromUser() {
+    private String[] getParametersFormUser() {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Enter number: ");
-        int choice = scanner.nextInt();
+        view.askForParameters();
+        String parametersStr = scanner.nextLine();
+        String[] parameters = parametersStr.split(" ");
+        return parameters;
+    }
+
+    /**
+     * Method responisible for checking if program call parameters are correct.
+     *
+     * @param args program call parameters
+     * @return true if parameters are correct, false if they are incorrect
+     */
+    private Boolean validateParameters(String[] args) {
+        if (args.length == 2) {
+            if ("OrdersManagement".equals(args[0])) {
+                if ("admin".equals(args[1]) || "viewer".equals(args[1])) {
+                    return true;
+                } else {
+                    return false;
+                }
+            } else {
+                return false;
+            }
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * Method for getting integer parameter from user.
+     *
+     * @return integer parameter given by user
+     */
+    public int getIntFromUser() {
+        Scanner scanner = new Scanner(System.in);
+        int choice = 1;
+        view.askForNumber();
+        try {
+            choice = scanner.nextInt();
+        } catch (NumberFormatException ex) {
+            view.printError(ex.getMessage());
+            return 9;
+        }
         return choice;
     }
 
     /**
-     *
+     * Method lets user choose which action form the main menu the application
+     * should do by showing them menu and asking for the number of option.
      */
-    public void mainMenu() {
+    private void mainMenu() {
         int choice = 1;
 
         while (choice != 0) {
@@ -92,7 +161,7 @@ public class Controller {
                     createOrder();
                     break;
                 case 3:
-
+                    deleteOrder();
                     break;
                 case 4:
                     searchMenu();
@@ -101,12 +170,17 @@ public class Controller {
                     choice = 0;
                     break;
                 default:
-                    System.out.println("Number incorrect!");
+                    view.printErrorNumber();
                     break;
             }
         }
     }
 
+    /**
+     * Method lets user choose which action form the searchv menu the
+     * application should do by showing them menu and asking for the number of
+     * option.
+     */
     private void searchMenu() {
         int choice = 1;
 
@@ -115,36 +189,74 @@ public class Controller {
             choice = getIntFromUser();
             switch (choice) {
                 case 1:
-
+                    searchOrdersByNumber();
                     break;
                 case 2:
+                    searchOrdersByDate();
                     break;
                 case 9:
                     choice = 0;
                     break;
                 default:
-                    System.out.println("Number incorrect!");
+                    view.printErrorNumber();
                     break;
             }
         }
     }
 
+    /**
+     * Method lets user choose which action form the menu for viewer only the
+     * application should do by showing them menu and asking for the number of
+     * option.
+     */
+    private void viewerMenu() {
+        int choice = 1;
+
+        while (choice != 0) {
+            view.printViewerMenu();
+            choice = getIntFromUser();
+            switch (choice) {
+                case 1:
+                    view.printOrdersList(model.getOrdersList());
+                    break;
+                case 2:
+                    searchMenu();
+                    break;
+                case 0:
+                    choice = 0;
+                    break;
+                default:
+                    view.printErrorNumber();
+                    break;
+            }
+        }
+    }
+
+    /**
+     * Method for getting order parameters from user and adding new order to the
+     * list.
+     */
     private void createOrder() {
         Scanner scanner = new Scanner(System.in);
         Boolean ifCont = true;
-        Order newOrder = new Order();
 
         view.printAddOrder();
-        newOrder.setNumber(scanner.next());
-        newOrder.setBuyer(createBuyer());
-        newOrder.setOrderDate(createDate());
-        newOrder.setProducts(addProducts(newOrder));
-        System.out.println("Payment method: ");
-        newOrder.setPaymentMethod(scanner.next());
+        String number = scanner.next();
+        Buyer buyer = createBuyer();
+        Date date = createDate();
+        List<Product> products = new ArrayList(addProducts());
+        view.askForOrderPaymentMeth();
+        String paymentMethod = scanner.nextLine();
+        Order newOrder = new Order(number, date, buyer, products, paymentMethod);
         model.addOrder(newOrder);
     }
 
-    public List<Product> addProducts(Order order) {
+    /**
+     * Method for creating new products list for the order.
+     *
+     * @return list of products
+     */
+    private List<Product> addProducts() {
         Scanner scanner = new Scanner(System.in);
         List<Product> products = new ArrayList();
         int choice = 1;
@@ -158,45 +270,111 @@ public class Controller {
         return products;
     }
 
+    /**
+     * Metod for getting product parameters from user and creating new product.
+     *
+     * @return created product
+     */
     private Product createNewProduct() {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Product name:");
+        view.askForProductName();
         String name = scanner.next();
-        System.out.println("Price netto:");
+        view.askForPriceNetto();
         double priceNetto = scanner.nextDouble();
-        System.out.println("Quantinity:");
+        view.askForQuantinity();
         int quantinity = scanner.nextInt();
-        System.out.println("Unit:");
+        view.askForProductUnit();
         String unit = scanner.next();
-        System.out.println("VAT rate:");
+        view.askForProductVatRate();
         int vatRate = scanner.nextInt();
         Product newProduct = new Product(name, priceNetto, vatRate, quantinity, unit);
         return newProduct;
     }
 
+    /**
+     * Metod for getting buyer parameters from user and creating new buyer.
+     *
+     * @return created buyer
+     */
     private Buyer createBuyer() {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Buyers name: ");
+        view.askForBuyerName();
         String buyerName = scanner.next();
-        System.out.println("Buyers surname: ");
+        view.askForBuyerSurname();
         String buyerSurname = scanner.next();
-        System.out.println("Buyers address: ");
+        view.askForBuyerAddress();
         String buyerAddress = scanner.nextLine();
         Buyer newBuyer = new Buyer(buyerName, buyerSurname, buyerAddress);
         return newBuyer;
     }
 
+    /**
+     * Metod for getting date parameters from user and creating new date.
+     *
+     * @return created date
+     */
     private Date createDate() {
         Scanner scanner = new Scanner(System.in);
-        Date newDate = new Date();
-
         view.askForDate();
-        newDate.setDay(scanner.nextInt());
+        int day = scanner.nextInt();
         view.askForMonth();
-        newDate.setMonth(scanner.nextInt());
+        int month = scanner.nextInt();
         view.askForYear();
-        newDate.setYear(scanner.nextInt());
+        int year = scanner.nextInt();
+        Date newDate = new Date(day, month, year);
         return newDate;
     }
 
+    /**
+     * Method responsible for deleting order based on order number choosen by
+     * user.
+     */
+    private void deleteOrder() {
+        Scanner scanner = new Scanner(System.in);
+        view.printDeleteOrder();
+        String number = scanner.nextLine();
+        model.deleteOrder(number);
+    }
+
+    /**
+     * Method lets user search order by number.
+     */
+    private void searchOrdersByNumber() {
+        Scanner scanner = new Scanner(System.in);
+        List<Order> foundOrders = new ArrayList();
+        view.printSearchOrderNumber();
+        String number = scanner.nextLine();
+        try {
+            foundOrders = model.searchOrderByNumber(number);
+        } catch (OrderNotFoundException ex) {
+            view.printError(ex.getMessage());
+        }
+        for (int i = 0; i < foundOrders.size(); i++) {
+            view.printOrdersList(foundOrders);
+        }
+    }
+
+    /**
+     * Method lets user search order by date.
+     */
+    private void searchOrdersByDate() {
+        Scanner scanner = new Scanner(System.in);
+        List<Order> foundOrders = new ArrayList();
+        Date date = new Date();
+
+        view.askForDate();
+        date.setDay(scanner.nextInt());
+        view.askForMonth();
+        date.setMonth(scanner.nextInt());
+        view.askForYear();
+        date.setYear(scanner.nextInt());
+        try {
+            foundOrders = model.searchOrderByDate(date);
+        } catch (OrderNotFoundException ex) {
+            view.printError(ex.getMessage());
+        }
+        for (int i = 0; i < foundOrders.size(); i++) {
+            view.printOrdersList(foundOrders);
+        }
+    }
 }
