@@ -16,7 +16,7 @@ import pl.polsl.goworoliwia.view.View;
  * For example: OrdersManagement admin
  *
  * @author Oliwia Gowor
- * @version 1.0
+ * @version 2.0
  */
 public class Main {
 

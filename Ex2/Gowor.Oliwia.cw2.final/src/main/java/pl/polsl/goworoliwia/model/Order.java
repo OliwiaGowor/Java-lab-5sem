@@ -10,7 +10,7 @@ import java.util.List;
  * Model class of the application responsible for order data.
  *
  * @author Oliwia Gowor
- * @version 1.0
+ * @version 2.0
  */
 public class Order {
 
@@ -199,9 +199,16 @@ public class Order {
      * Method adds given product to products list.
      *
      * @param product parameter representing product to add to the list
+     * @return true when product was added, false when it wasn't
      */
-    public void addNewProduct(Product product) {
-        products.add(product);
+    public Boolean addNewProduct(Product product) {
+        if (product != null) {
+            products.add(product);
+            return true;
+        } else {
+            return false;
+        }
+        
     }
 
     /**

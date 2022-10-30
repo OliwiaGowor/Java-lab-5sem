@@ -8,9 +8,45 @@ package pl.polsl.goworoliwia.model;
  * Model class of the application responsible for product data.
  *
  * @author Oliwia Gowor
- * @version 1.0
+ * @version 2.0
  */
 public class Product {
+
+    /**
+     * Enumeration type representing VAT rates, by default extends Enum
+     */
+    public enum VatRate {
+        ZERO(0.0), FIVE(0.05), EIGHT(0.08), TWENTYTHREE(0.23);
+        Double vatRate;
+
+        /**
+         * Enum constructor.
+         *
+         * @param vatRate parameter representing VAT rate of the product
+         */
+        VatRate(Double vatRate) {
+            this.vatRate = vatRate;
+        }
+
+        /**
+         * Method returns VAT rate of the product.
+         *
+         * @return parameter representing VAT rate of the product
+         */
+        public Double getVatRate() {
+            return vatRate;
+        }
+
+        /**
+         * Method sets vatRate class parameter.
+         *
+         * @param vatRate parameter representing VAT rate of the product
+         */
+        public void setVatRate(Double vatRate) {
+            this.vatRate = vatRate;
+        }
+
+    };
 
     /**
      * Value represents name of the product.
@@ -36,7 +72,7 @@ public class Product {
     /**
      * Value represents VAT Rate of the product.
      */
-    private VatRates.VatRate vatRate;
+    private VatRate vatRate;
     /**
      * Value represents quantinity of the product.
      */
@@ -61,7 +97,7 @@ public class Product {
      * @param quantinity parameter represents quantinity of the product
      * @param unit parameter represents products unit
      */
-    public Product(String name, double priceNetto, VatRates.VatRate vatRate, int quantinity, String unit) {
+    public Product(String name, double priceNetto, VatRate vatRate, int quantinity, String unit) {
         this.name = name;
         this.priceNetto = priceNetto;
         this.vatRate = vatRate;
@@ -170,7 +206,7 @@ public class Product {
      *
      * @return parameter representing VAT rate of the product
      */
-    public VatRates.VatRate getVatRate() {
+    public VatRate getVatRate() {
         return vatRate;
     }
 
@@ -179,7 +215,7 @@ public class Product {
      *
      * @param vatRate parameter representing products VAT rate
      */
-    public void setVatRate(VatRates.VatRate vatRate) {
+    public void setVatRate(VatRate vatRate) {
         this.vatRate = vatRate;
     }
 

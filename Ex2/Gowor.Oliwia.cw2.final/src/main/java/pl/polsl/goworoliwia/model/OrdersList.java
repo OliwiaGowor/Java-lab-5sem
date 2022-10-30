@@ -13,7 +13,7 @@ import java.util.stream.Stream;
  * Model class of the application responsible for list of orders data.
  *
  * @author Oliwia Gowor
- * @version 1.0
+ * @version 2.0
  */
 public class OrdersList {
 
@@ -82,10 +82,10 @@ public class OrdersList {
         for (Order order : ordersList) {
             if (order.getNumber().equals(number)) {
                 ordersList.remove(order);
-            } else {
-                throw new OrderNotFoundException("No such order on list!");
+                return;
             }
         }
+        throw new OrderNotFoundException("No such order on list!");
     }
 
     /**
@@ -119,9 +119,11 @@ public class OrdersList {
      */
     public List<Order> searchOrderByDate(Date date) throws OrderNotFoundException {
         List<Order> ordersStream = ordersList.stream()
-                .filter(flitered -> flitered.getOrderDate().equals(date))
+                .filter(flitered -> flitered.getOrderDate().getDay() == date.getDay())
+                .filter(flitered -> flitered.getOrderDate().getMonth() == date.getMonth())
+                .filter(flitered -> flitered.getOrderDate().getYear() == date.getYear())
                 .collect(Collectors.toList());
-        if (ordersStream.size() > 0) {
+        if (!ordersStream.isEmpty()) {
             return ordersStream;
         } else {
             throw new OrderNotFoundException("No such order on list!");

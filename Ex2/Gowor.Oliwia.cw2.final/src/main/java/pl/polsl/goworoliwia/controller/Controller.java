@@ -13,8 +13,7 @@ import pl.polsl.goworoliwia.model.Order;
 import pl.polsl.goworoliwia.model.OrderNotFoundException;
 import pl.polsl.goworoliwia.model.OrdersList;
 import pl.polsl.goworoliwia.model.Product;
-import pl.polsl.goworoliwia.model.VatRates;
-import pl.polsl.goworoliwia.model.VatRates.VatRate;
+import pl.polsl.goworoliwia.model.Product.VatRate;
 import pl.polsl.goworoliwia.view.View;
 
 /**
@@ -22,7 +21,7 @@ import pl.polsl.goworoliwia.view.View;
  * modifying model.
  *
  * @author Oliwia Gowor
- * @version 1.0
+ * @version 2.0
  */
 public class Controller {
 
@@ -302,16 +301,16 @@ public class Controller {
             choice = getIntFromUser();
             switch (choice) {
                 case 1 -> {
-                    return VatRates.VatRate.ZERO;
+                    return VatRate.ZERO;
                 }
                 case 2 -> {
-                    return VatRates.VatRate.FIVE;
+                    return VatRate.FIVE;
                 }
                 case 3 -> {
-                    return VatRates.VatRate.EIGHT;
+                    return VatRate.EIGHT;
                 }
                 case 4 -> {
-                    return VatRates.VatRate.TWENTYTHREE;
+                    return VatRate.TWENTYTHREE;
                 }
                 default -> view.printErrorNumber();
             }

@@ -9,7 +9,7 @@ package pl.polsl.goworoliwia.model;
  * Order object on list.
  *
  * @author Oliwia Gowor
- * @version 1.0
+ * @version 2.0
  */
 public class OrderNotFoundException extends Exception {
 

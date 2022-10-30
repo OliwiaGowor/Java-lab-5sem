@@ -8,7 +8,7 @@ package pl.polsl.goworoliwia.model;
  * Model class of the application responsible for buyer data.
  *
  * @author Oliwia Gowor
- * @version 1.0
+ * @version 2.0
  */
 public class Buyer {
 
