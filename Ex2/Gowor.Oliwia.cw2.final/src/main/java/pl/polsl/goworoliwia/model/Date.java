@@ -28,7 +28,11 @@ public class Date {
     /**
      * Non-parameter Date class constructor
      */
-    public Date() { }
+    public Date() {
+        this.day = 1;
+        this.month = 1;
+        this.year = 2000;
+    }
 
     /**
      * Date class constructor.

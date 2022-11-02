@@ -28,7 +28,11 @@ public class Buyer {
     /**
      * Non-parameter constructor.
      */
-    public Buyer() { }
+    public Buyer() {
+        this.name = "none";
+        this.surname = "none";
+        this.address = "none";
+    }
 
     /**
      * Buyer class constructor.

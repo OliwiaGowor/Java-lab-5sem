@@ -131,26 +131,6 @@ public class OrdersList {
     }
 
     /**
-     * Method searches orders on the list that have corresponding buyers surname
-     * to the one given.
-     *
-     * @param surname parameter representing buyers surname
-     * @return list of found orders
-     * @throws OrderNotFoundException when attempted to get order that is not
-     * present in a list
-     */
-    public List<Order> searchOrderBySurname(String surname) throws OrderNotFoundException {
-        List<Order> ordersStream = ordersList.stream()
-                .filter(flitered -> flitered.getBuyer().getSurname().equals(surname))
-                .collect(Collectors.toList());
-        if (ordersStream.size() > 0) {
-            return ordersStream;
-        } else {
-            throw new OrderNotFoundException("No such order on list!");
-        }
-    }
-
-    /**
      * Method checks if order with given number already exists.
      *
      * @param toCheck parameter represents order number to be checked

@@ -4,7 +4,9 @@
  */
 package pl.polsl.goworoliwia.model;
 
+import java.util.Arrays;
 import java.util.List;
+import pl.polsl.goworoliwia.model.Product.VatRate;
 
 /**
  * Model class of the application responsible for order data.
@@ -50,7 +52,16 @@ public class Order {
     /**
      * Non-parameter constructor
      */
-    public Order() { }
+    public Order() {
+        this.number = "none";
+        this.orderDate = new Date();
+        this.buyer = new Buyer();
+        this.products = Arrays.asList(new Product());
+        this.paymentMethod = "none";
+        this.sumNetto = 0;
+        this.sumVat = 0;
+        this.sumBrutto = 0;
+    }
 
     /**
      * Order class constructor.
@@ -68,11 +79,11 @@ public class Order {
         this.products = products;
         this.paymentMethod = paymentMethod;
         //calculate sumNetto
-        this.sumNetto = calculateSumNetto();
+        this.sumNetto = calculateSumNetto(products);
         //calculate sumBrutto
-        this.sumVat = calculateSumVat();
+        this.sumVat = calculateSumVat(products);
         //calculate sumVat
-        this.sumBrutto = calculateSumBrutto();
+        this.sumBrutto = calculateSumBrutto(products);
     }
 
     /**
@@ -208,17 +219,19 @@ public class Order {
         } else {
             return false;
         }
-        
+
     }
 
     /**
      * Method calculates sumNetto parameter.
      *
+     * @param givenProducts parameter represents list of products to calculate
+     * sum Netto of
      * @return calculated sumNetto parameter
      */
-    private Double calculateSumNetto() {
+    private Double calculateSumNetto(List<Product> givenProducts) {
         Double sumNetto = 0.0;
-        for (Product product : products) {
+        for (Product product : givenProducts) {
             sumNetto += product.getValueNetto();
         }
         return sumNetto;
@@ -227,11 +240,13 @@ public class Order {
     /**
      * Method calculates sumVat parameter.
      *
+     * @param givenProducts parameter represents list of products to calculate
+     * sum VAT of
      * @return calculated sumVat parameter
      */
-    private Double calculateSumVat() {
+    private Double calculateSumVat(List<Product> givenProducts) {
         Double sumVat = 0.0;
-        for (Product product : products) {
+        for (Product product : givenProducts) {
             sumVat += product.getValueVat();
         }
         return sumVat;
@@ -240,11 +255,13 @@ public class Order {
     /**
      * Method calculates sumBrutto parameter.
      *
+     * @param givenProducts parameter represents list of products to calculate
+     * sum Brutto of
      * @return calculated sumBrutto parameter
      */
-    private Double calculateSumBrutto() {
+    private Double calculateSumBrutto(List<Product> givenProducts) {
         Double sumBrutto = 0.0;
-        for (Product product : products) {
+        for (Product product : givenProducts) {
             sumBrutto += product.getValueBrutto();
         }
         return sumBrutto;

@@ -4,6 +4,8 @@
  */
 package pl.polsl.goworoliwia.model;
 
+import java.util.List;
+
 /**
  * Model class of the application responsible for product data.
  *
@@ -86,6 +88,14 @@ public class Product {
      * Non-parameter constructor.
      */
     public Product() {
+        this.name = "none";
+        this.priceNetto = 0;
+        this.vatRate = VatRate.ZERO;
+        this.quantinity = 0;
+        this.unit = "none";
+        this.valueNetto = 0;
+        this.valueVat = 0;
+        this.valueBrutto = 0;
     }
 
     /**
@@ -104,11 +114,11 @@ public class Product {
         this.quantinity = quantinity;
         this.unit = unit;
         //calculate value Netto
-        this.valueNetto = priceNetto * quantinity;
+        this.valueNetto = calculateValueNetto(priceNetto,quantinity);
         //calculate value VAT
-        this.valueVat = valueNetto * vatRate.getVatRate();
+        this.valueVat = calculateValueVat(valueNetto, vatRate);
         //calculate value Brutto
-        this.valueBrutto = valueNetto + valueVat;
+        this.valueBrutto = calculateValueBrutto(valueNetto, valueVat);
     }
 
     /**
@@ -253,6 +263,45 @@ public class Product {
      */
     public void setUnit(String unit) {
         this.unit = unit;
+    }
+    
+     /**
+     * Method calculates value Netto.
+     *
+     * @param priceNetto parameter representing price Netto of the product
+     * @param quantinity parameter representing quantinity of the product
+     * @return calculated value Netto
+     */
+    private Double calculateValueNetto(Double priceNetto, int quantinity) {
+        Double valueNettoTmp = 0.0;
+        valueNettoTmp = priceNetto * quantinity;
+        return valueNettoTmp;
+    }
+    
+    /**
+     * Method calculates value Brutto.
+     *
+     * @param valueNetto parameter representing value Netto of the product
+     * @param valueVat parameter representing VAT value of the product
+     * @return calculated value Brutto
+     */
+    private Double calculateValueBrutto(Double valueNetto, Double valueVat) {
+        Double valueBruttoTmp = 0.0;
+        valueBruttoTmp = valueNetto + valueVat;
+        return valueBruttoTmp;
+    }
+    
+    /**
+     * Method calculates value VAT.
+     *
+     * @param valueNetto parameter representing value Netto of the product
+     * @param vatRate parameter representing VAT rate of the product
+     * @return calculated value VAT
+     */
+    private Double calculateValueVat(Double valueNetto, VatRate vatRate) {
+        Double valueVatTmp = 0.0;
+        valueVatTmp = valueNetto * vatRate.getVatRate();
+        return valueVatTmp;
     }
 
 }

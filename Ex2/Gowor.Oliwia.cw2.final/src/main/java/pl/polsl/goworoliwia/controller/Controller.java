@@ -246,10 +246,13 @@ public class Controller {
         Buyer buyer = createBuyer();
         Date date = createDate();
         List<Product> products = new ArrayList(addProducts());
+        scanner.nextLine();
         view.askForOrderPaymentMeth();
         String paymentMethod = scanner.nextLine();
         Order newOrder = new Order(number, date, buyer, products, paymentMethod);
-        model.addOrder(newOrder);
+        if (!model.addOrder(newOrder)) {
+            view.printErrorRepeatedOrderNumber();
+        }
     }
 
     /**
@@ -329,6 +332,7 @@ public class Controller {
         view.askForBuyerSurname();
         String buyerSurname = scanner.next();
         view.askForBuyerAddress();
+        scanner.nextLine();
         String buyerAddress = scanner.nextLine();
         Buyer newBuyer = new Buyer(buyerName, buyerSurname, buyerAddress);
         return newBuyer;
@@ -379,9 +383,7 @@ public class Controller {
         } catch (OrderNotFoundException ex) {
             view.printError(ex.getMessage());
         }
-        for (int i = 0; i < foundOrders.size(); i++) {
             view.printOrdersList(foundOrders);
-        }
     }
 
     /**
@@ -403,8 +405,6 @@ public class Controller {
         } catch (OrderNotFoundException ex) {
             view.printError(ex.getMessage());
         }
-        for (int i = 0; i < foundOrders.size(); i++) {
             view.printOrdersList(foundOrders);
-        }
     }
 }

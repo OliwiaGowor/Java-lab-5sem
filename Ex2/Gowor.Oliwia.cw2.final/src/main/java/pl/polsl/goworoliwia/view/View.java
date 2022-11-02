@@ -85,8 +85,8 @@ public class View {
      */
     public void printOrdersList(List<Order> list) {
         if (!list.isEmpty()) {
-            for (int i = 0; i < list.size(); i++) {
-                printOrder(list.get(i));
+            for (Order order : list) {
+                printOrder(order);
             }
         } else {
             System.out.println("List is empty!");
@@ -138,9 +138,9 @@ public class View {
     private void printProductsList(List<Product> productsList) {
         System.out.println("name" + "|" + "quantinity" + "|" + "unit" + "|"
                 + "price Netto" + "|" + "value Netto" + "|" + "VAT rate" + "|" + "value VAT" + "|" + "value Brutto");
-        for (int i = 0; i < productsList.size(); i++) {
+        for (Product product : productsList) {
             if (!productsList.isEmpty()) {
-                printProduct(productsList.get(i));
+                printProduct(product);
             }
         }
     }
@@ -302,8 +302,8 @@ public class View {
      */
     public void printParameters(String[] args) {
         System.out.println("Program parameters: ");
-        for (int i = 0; i < args.length; i++) {
-            System.out.print(args[i] + " ");
+        for (String arg : args) {
+            System.out.print(arg + " ");
         }
     }
 
@@ -312,6 +312,13 @@ public class View {
      */
     public void askForParameters() {
         System.out.println("Enter program parameters (programName role): ");
+    }
+    
+    /**
+     * Method prints a error message about repeaated order number.
+     */
+    public void printErrorRepeatedOrderNumber() {
+        System.out.println("Order with this number already exists!");
     }
 
 }
