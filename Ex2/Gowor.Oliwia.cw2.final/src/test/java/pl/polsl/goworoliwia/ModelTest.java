@@ -5,6 +5,7 @@
 package pl.polsl.goworoliwia;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Stream;
 import org.junit.jupiter.api.*;
@@ -38,30 +39,16 @@ public class ModelTest {
      */
     @BeforeEach
     public void setUp() {
-        Date date1 = new Date(1, 1, 1);
-        Date date2 = new Date(2, 2, 2);
         Product product = new Product("name", 10, VatRate.TWENTYTHREE, 10, "szt");
         List<Product> products = new ArrayList();
         products.add(product);
         Buyer buyer = new Buyer("name", "surname", "address");
-        Order order1 = new Order("1", date1, buyer, products, "card");
-        Order order2 = new Order("2", date2, buyer, products, "card");
+        Order order1 = new Order("1", new Date(1, 1, 1), buyer, products, "card");
+        Order order2 = new Order("2", new Date(2, 2, 2), buyer, products, "card");
         List<Order> orders = new ArrayList();
         orders.add(order1);
         orders.add(order2);
         ordersList = new OrdersList(orders);
-    }
-
-    /**
-     * Test checks if method addOrder works properly when added data is null.
-     */
-    @Test
-    public void shouldThrowExceptionWhenAddedOrderisNull() {
-        try {
-            ordersList.addOrder(null);
-            fail("An exception should be thrown when the data is null");
-        } catch (Exception ex) {
-        }
     }
 
     /**
@@ -98,6 +85,7 @@ public class ModelTest {
             assertEquals(ordersList.getOrdersList().get(ordersList.getOrdersList().size() - 1).getProducts().get(i).getPriceNetto(), newOrder.getProducts().get(i).getPriceNetto(), "Product Netto price should be the same in both instances");
             assertEquals(ordersList.getOrdersList().get(ordersList.getOrdersList().size() - 1).getProducts().get(i).getValueNetto(), newOrder.getProducts().get(i).getValueNetto(), "Product Netto value should be the same in both instances");
             assertEquals(ordersList.getOrdersList().get(ordersList.getOrdersList().size() - 1).getProducts().get(i).getValueBrutto(), newOrder.getProducts().get(i).getValueBrutto(), "Product Brutto value should be the same in both instances");
+            assertEquals(ordersList.getOrdersList().get(ordersList.getOrdersList().size() - 1).getProducts().get(i).getValueVat(), newOrder.getProducts().get(i).getValueVat(), "Product VAT value should be the same in both instances");
             assertEquals(ordersList.getOrdersList().get(ordersList.getOrdersList().size() - 1).getProducts().get(i).getVatRate(), newOrder.getProducts().get(i).getVatRate(), "Product VAT rate should be the same in both instances");
             assertEquals(ordersList.getOrdersList().get(ordersList.getOrdersList().size() - 1).getProducts().get(i).getQuantinity(), newOrder.getProducts().get(i).getQuantinity(), "Product quantinity value should be the same in both instances");
             assertEquals(ordersList.getOrdersList().get(ordersList.getOrdersList().size() - 1).getProducts().get(i).getUnit(), newOrder.getProducts().get(i).getUnit(), "Product unit should be the same in both instances");
@@ -109,30 +97,30 @@ public class ModelTest {
     }
 
     /**
+     * Test checks if method addOrder works properly when added data is null.
+     */
+    @Test
+    public void shouldThrowExceptionWhenAddedOrderisNull() {
+        try {
+            ordersList.addOrder(null);
+            fail("An exception should be thrown when the data is null");
+        } catch (Exception ex) {
+        }
+    }
+
+    /**
      * Test checks if method deleteOrder works properly for numbers, that are
-     * not on the list.
+     * not on the list or null.
      *
      * @param number parameter represents number of order to delete
      */
     @ParameterizedTest
     @CsvSource({"not-number", "doesnt-exist", "notOnTheList"})
-    public void shouldThrowExceptionWhenNumberToDeleteIsNotOnList(String number) {
+    @NullSource()
+    public void shouldThrowExceptionWhenNumberToDeleteIsNotOnListOrNull(String number) {
         try {
             ordersList.deleteOrder(number);
             fail("An exception should be thrown when the order is not on the list");
-        } catch (OrderNotFoundException ex) {
-        }
-    }
-
-    /**
-     * Test checks if method deleteOrder works properly for null instead of
-     * number.
-     */
-    @Test
-    public void shouldThrowExceptionWhenNumberToDeleteIsNull() {
-        try {
-            ordersList.deleteOrder(null);
-            fail("An exception should be thrown when the number is null");
         } catch (OrderNotFoundException ex) {
         }
     }
@@ -155,13 +143,14 @@ public class ModelTest {
 
     /**
      * Test checks if method searchOrderByNumber works properly when number of
-     * order to find is not on the list.
+     * order to find is not on the list or null.
      *
      * @param number parameter represents number of order to find
      */
     @ParameterizedTest
     @CsvSource({"not-number", "doesnt-exist", "notOnTheList"})
-    public void shouldThrowExceptionWhenOrderNumberToFindIsNotOnList(String number) {
+    @NullSource()
+    public void shouldThrowExceptionWhenOrderNumberToFindIsNotOnListOrNull(String number) {
         try {
             ordersList.searchOrderByNumber(number);
             fail("An exception should be thrown when the order is not on the list");
@@ -186,27 +175,14 @@ public class ModelTest {
     }
 
     /**
-     * Test checks if method searchOrderByNumber works properly when number of
-     * order to find is null.
-     */
-    @Test
-    public void shouldThrowExceptionWhenOrderNumberToFindIsNull() {
-        try {
-            ordersList.searchOrderByNumber(null);
-            fail("An exception should be thrown when the order number is null");
-        } catch (OrderNotFoundException ex) {
-        }
-    }
-
-    /**
      * Test checks if method searchOrderByDate works properly when date of order
-     * to find is not on the list.
+     * to find is not on the list or null.
      *
      * @param date parameter represents date of order to find
      */
     @ParameterizedTest
     @MethodSource("wrongDatesToFind")
-    public void shouldThrowExceptionWhenOrderDateToFindIsNotOnList(Date date) {
+    public void shouldThrowExceptionWhenOrderDateToFindIsNotOnListOrNull(Date date) {
         try {
             ordersList.searchOrderByDate(date);
             fail("An exception should be thrown when order date is not on the list");
@@ -231,19 +207,6 @@ public class ModelTest {
     }
 
     /**
-     * Test checks if method searchOrderByDate works properly when date of order
-     * to find is null.
-     */
-    @Test
-    public void shouldThrowExceptionWhenOrderDateToFindIsNull() {
-        try {
-            ordersList.searchOrderByDate(null);
-            fail("An exception should be thrown when the order date is null");
-        } catch (OrderNotFoundException ex) {
-        }
-    }
-
-    /**
      * Test checks if method addNewProduct works properly for right data.
      *
      * @param product parameter represents product to add to the list
@@ -258,6 +221,7 @@ public class ModelTest {
         assertEquals(order.getProducts().get(order.getProducts().size() - 1).getPriceNetto(), testProduct.getPriceNetto(), "Product Netto price should be the same in both instances");
         assertEquals(order.getProducts().get(order.getProducts().size() - 1).getValueNetto(), testProduct.getValueNetto(), "Product Netto value should be the same in both instances");
         assertEquals(order.getProducts().get(order.getProducts().size() - 1).getValueBrutto(), testProduct.getValueBrutto(), "Product Brutto value should be the same in both instances");
+        assertEquals(order.getProducts().get(order.getProducts().size() - 1).getValueVat(), testProduct.getValueVat(), "Product VAT value should be the same in both instances");
         assertEquals(order.getProducts().get(order.getProducts().size() - 1).getVatRate(), testProduct.getVatRate(), "Product VAT rate should be the same in both instances");
         assertEquals(order.getProducts().get(order.getProducts().size() - 1).getQuantinity(), testProduct.getQuantinity(), "Product quantinity value should be the same in both instances");
         assertEquals(order.getProducts().get(order.getProducts().size() - 1).getUnit(), testProduct.getUnit(), "Product unit should be the same in both instances");
@@ -320,14 +284,9 @@ public class ModelTest {
      * @return stream of Order objects
      */
     static Stream dataOrdersRepeatedNumbers() {
-        Date date1 = new Date(1, 1, 1);
-        Date date2 = new Date(2, 2, 2);
-        Product product = new Product("name", 10, VatRate.TWENTYTHREE, 10, "szt");
-        List<Product> products = new ArrayList();
-        products.add(product);
-        Buyer buyer = new Buyer("name", "surname", "address");
-        Order order1 = new Order("1", date1, buyer, products, "card");
-        Order order2 = new Order("2", date2, buyer, products, "card");
+        List<Product> products = Arrays.asList(new Product("name", 10, VatRate.TWENTYTHREE, 10, "szt"));
+        Order order1 = new Order("1", new Date(1, 1, 1), new Buyer("name", "surname", "address"), products, "card");
+        Order order2 = new Order("2", new Date(2, 2, 2), new Buyer("name", "surname", "address"), products, "card");
         return Stream.of(order1, order2);
     }
 
@@ -337,15 +296,11 @@ public class ModelTest {
      * @return stream of Order objects
      */
     static Stream dataOrdersRightNumbers() {
-        Date date1 = new Date(1, 1, 1);
-        Date date2 = new Date(2, 2, 2);
-        Product product = new Product("name", 10, VatRate.TWENTYTHREE, 10, "szt");
-        List<Product> products = new ArrayList();
-        products.add(product);
-        Buyer buyer = new Buyer("name", "surname", "address");
-        Order order1 = new Order("new-number", date1, buyer, products, "card");
-        Order order2 = new Order("not-repeated", date2, buyer, products, "card");
-        return Stream.of(order1, order2);
+        List<Product> products = Arrays.asList(new Product("name", 10, VatRate.TWENTYTHREE, 10, "szt"));
+        Order order1 = new Order("new-number", new Date(1, 1, 1), new Buyer("name", "surname", "address"), products, "card");
+        Order order2 = new Order("not-repeated", new Date(2, 2, 2), new Buyer("name", "surname", "address"), products, "card");
+        Order order3 = new Order();
+        return Stream.of(order1, order2, order3);
     }
 
     /**
@@ -367,7 +322,8 @@ public class ModelTest {
     static Stream wrongDatesToFind() {
         Date date1 = new Date(0, 0, 0);
         Date date2 = new Date(100, 100, 100);
-        return Stream.of(date1, date2);
+        Date date3 = new Date();
+        return Stream.of(date1, date2, date3);
     }
 
     /**
@@ -377,7 +333,8 @@ public class ModelTest {
      */
     static Stream productsToAdd() {
         Product product1 = new Product("1", 1.0, VatRate.ZERO, 1, "szt");
-        Product product2 = new Product("2", 1.0, VatRate.ZERO, 1, "szt");
-        return Stream.of(product1, product2);
+        Product product2 = new Product("2", 10.0, VatRate.FIVE, 1, "l");
+        Product product3 = new Product();
+        return Stream.of(product1, product2, product3);
     }
 }
