@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit this template
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <h1>Add new order</h1>
+        <form id="addProducts" action="addProduct" method="GET">
+            <label for="inputProductName">Product name</label>
+            <input type="text" id="inputProductName" name="inputProductName" required>
+            <label for="inputPriceNetto">Price Netto</label>
+            <input type="text" id="inputPriceNetto" name="inputPriceNetto" required>
+            <label for="inputQuantinity">Quantinity</label>
+            <input type="text" id="inputQuantinity" name="inputQuantinity" required>
+            <label for="inputUnit">Product unit</label>
+            <input type="text" id="inputUnit" name="inputUnit" required>
+            <label for="vat">VAT rate</label>
+            <select class="selectVat" name="vat" required>
+                <option value="">Choose...</option>
+                <option value="ZERO">0%</option>
+                <option value="FIVE">5%</option>
+                <option value="EIGHT">8%</option>
+                <option value="TWENTYTHREE">23%</option>
+            </select>
+            <button id="submit-product" type="submit">Add product</button>
+            <input type="button" id="add-product" value="Add product" onClick="getOrders('number', 'tableOrders');" />
+        </form>
+
+        <table id="products">
+            <thead>
+                <tr>
+                    <th>Product name</th>
+                    <th>Price Netto</th>
+                    <th>Quantinity</th>
+                    <th>Unit</th>
+                    <th>Value Netto</th>
+                    <th>VAT rate</th>
+                    <th>VAT value</th>
+                    <th>Value Brutto</th>
+                </tr>
+            </thead>
+            <tbody id="tableProducts">
+            </tbody>      
+        </table>
+
+        <form>
+
+        </form>
+    </body>
+</html>
