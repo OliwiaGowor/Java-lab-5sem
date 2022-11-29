@@ -1,4 +1,6 @@
 <!DOCTYPE html>
+<!-- @author Oliwia Gowor
+ @version 4.0 --> 
 <html>
     <head>
         <title>Orders</title>
@@ -9,43 +11,47 @@
     <body>
 
         <div class = "navbar">
-     
-            <a href="/WebLab3/addOrder.html">Add new order</a>
-            <input type="button" id="deleteOrder" value="Delete order" onClick="getOrders('number', 'tableOrders');" />
+            <a href="/WebLab3/addOrder.html"><button>Add new order</button></a>
+            <a href="/WebLab3/deleteOrder.html"><button>Delete order</button></a>
+            <a href="/WebLab3/Cookie"><button>Cookies</button></a>
+            <form action="Logout" method="GET" class="logoutButton">
+                <button class="logout" type="submit">Log out</button>
+            </form>
         </div>
-        
-        <h1>Orders</h1>
-        
-        <p>Search order by number</p>
-        <input type="text" id="number" name="number" />         
-        <input type="button" id="test1" value="Show" onClick="getOrders('number', 'tableOrders');" />
-        
-        <table>
-            <thead> 
-                <tr>
-                    <th rowspan="2">Order number</th>
-                    <th rowspan="2">Buyer's data</th>
-                    <th rowspan="2">Date</th>
-                    <th colspan="8">Products</th>
-                    <th rowspan="2">Payment Method</th>
-                    <th rowspan="2">Sum Netto</th>
-                    <th rowspan="2">Sum VAT</th>
-                    <th rowspan="2">Sum Brutto</th>
-                </tr>
-                <tr>
-                    <th>Product name</th>
-                    <th>Price Netto</th>
-                    <th>Quantinity</th>
-                    <th>Unit</th>
-                    <th>Value Netto</th>
-                    <th>VAT rate</th>
-                    <th>VAT value</th>
-                    <th>Value Brutto</th>
-                </tr>
-            </thead>            
-            <tbody id="tableOrders">
-            </tbody>            
-        </table>
+        <main class="mainShowAllOrders">
+            <h1>Orders</h1>
 
+            <p>Search order by number</p>
+            <input type="text" id="number" name="number" />         
+            <input type="button" id="searchByNumber" class="searchByNumber" value="Search" onClick="getOrders('number', 'tableOrders');" />
+            <p class="hint">(Leave empty and click "Search" to see all orders)</p>
+
+            <table class="tableAllOrders">
+                <thead> 
+                    <tr>
+                        <th rowspan="2">Order number</th>
+                        <th rowspan="2">Buyer's data</th>
+                        <th rowspan="2">Date</th>
+                        <th colspan="8">Products</th>
+                        <th rowspan="2">Payment Method</th>
+                        <th rowspan="2">Sum Netto</th>
+                        <th rowspan="2">Sum VAT</th>
+                        <th rowspan="2">Sum Brutto</th>
+                    </tr>
+                    <tr>
+                        <th>Product name</th>
+                        <th>Price Netto</th>
+                        <th>Quantinity</th>
+                        <th>Unit</th>
+                        <th>Value Netto</th>
+                        <th>VAT rate</th>
+                        <th>VAT value</th>
+                        <th>Value Brutto</th>
+                    </tr>
+                </thead>            
+                <tbody id="tableOrders">
+                </tbody>            
+            </table>
+        </main>
     </body>
 </html>
