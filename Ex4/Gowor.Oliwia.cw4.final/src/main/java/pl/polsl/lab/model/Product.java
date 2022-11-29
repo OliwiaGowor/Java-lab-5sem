@@ -4,13 +4,11 @@
  */
 package pl.polsl.lab.model;
 
-import java.util.List;
-
 /**
  * Model class of the application responsible for product data.
  *
  * @author Oliwia Gowor
- * @version 3.0
+ * @version 4.0
  */
 public class Product {
 

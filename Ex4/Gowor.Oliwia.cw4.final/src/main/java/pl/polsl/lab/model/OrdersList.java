@@ -13,7 +13,7 @@ import java.util.stream.Stream;
  * Model class of the application responsible for list of orders data.
  *
  * @author Oliwia Gowor
- * @version 3.0
+ * @version 4.0
  */
 public class OrdersList {
 
@@ -39,6 +39,9 @@ public class OrdersList {
         this.ordersList = ordersList;
     }
 
+    /**
+     * Method initializes list with some data.
+     */
     public void initialize() {
         Order order1 = new Order();
         Order order2 = new Order();
@@ -71,14 +74,15 @@ public class OrdersList {
      * Method responsible for adding new order to the list.
      *
      * @param order parameter representing order to add to the list
-     * @return true if new order is added, false if it's not
+     * @throws SameOrderNumberException when attempted to add order with the sme
+     * order number that is already on the list
      */
-    public Boolean addOrder(Order order) {
+    public void addOrder(Order order) throws SameOrderNumberException {
         if (!checkIfNumberExists(order.getNumber())) {
             ordersList.add(order);
-            return true;
+            return;
         } else {
-            return false;
+            throw new SameOrderNumberException("Order with this number is alerady on list!");
         }
     }
 
@@ -112,7 +116,7 @@ public class OrdersList {
         List<Order> ordersStream = ordersList.stream()
                 .filter(flitered -> flitered.getNumber().equals(number))
                 .collect(Collectors.toList());
-        if (ordersStream.size() > 0) {
+        if (!ordersStream.isEmpty()) {
             return ordersStream;
         } else {
             throw new OrderNotFoundException("No such order on list!");

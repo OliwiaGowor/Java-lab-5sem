@@ -5,25 +5,26 @@
 package pl.polsl.lab.model;
 
 /**
- * Exception class for object of OrdersList class thrown when there is no such
- * Order object on list.
+ * Exception class for object of OrdersList class thrown when there is order
+ * with the same number on the list.
  *
  * @author Oliwia Gowor
  * @version 4.0
  */
-public class OrderNotFoundException extends Exception {
+public class SameOrderNumberException extends Exception {
 
     /**
      * Non-parameter constructor
      */
-    public OrderNotFoundException() { }
+    public SameOrderNumberException() {
+    }
 
     /**
      * Exception class constructor
      *
      * @param message message to display
      */
-    public OrderNotFoundException(String message) {
+    public SameOrderNumberException(String message) {
         super(message);
     }
 }

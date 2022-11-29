@@ -8,7 +8,7 @@ package pl.polsl.lab.model;
  * Model class of the application responsible for date data.
  *
  * @author Oliwia Gowor
- * @version 3.0
+ * @version 4.0
  */
 public class Date {
 
