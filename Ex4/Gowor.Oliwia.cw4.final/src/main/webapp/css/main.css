@@ -1,9 +1,118 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css to edit this template
+*/
+/**
+ * @author Oliwia Gowor
+ * @version 4.0
+ */
+
 body {
-    background-color: lightgreen;
+    background-color: lightblue;
+    margin: 0;
+}
+
+main {
+    margin: 0 100px;
+    position: absolute;
+    top: 50px;
+    right: 0;
+    left: 0;
 }
 
 table, td, th, tr {
     border-collapse: collapse;
     border: 1px black solid;
     padding: 5px;
+}
+
+h1 {
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.navbar {
+    position: fixed;
+    top: 0;
+    background-color: wheat;
+    border-bottom: 1px solid burlywood;
+    display: flex;
+    width: 100%;
+    height: 50px;
+    margin: 0;
+    padding: 0;
+    align-items: center;
+}
+
+.navbar button {
+    padding: 10px 20px;
+    background-color: wheat;
+    border: none;
+    font-size: 17px;
+}
+
+main button, main input[type="button"], main input[type="submit"] {
+    font-size: 14px;
+    padding: 8px 13px;
+    display: block;
+    background-color: wheat;
+    border: 1px solid burlywood;
+    border-radius: 3px;
+    margin-top: 10px;
+}
+
+main button:hover, main input[type="button"]:hover, main input[type="submit"]:hover, main button:active, main input[type="button"]:active, main input[type="submit"]:active {
+    background-color: burlywood;
+}
+
+.navbar button:hover {
+    color: lightblue;
+}
+
+.logoutButton {
+    display: inline-block;
+}
+
+.mainLogin, .mainShowAllOrders, .mainDeleteOrder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.mainLogin label, .mainDeleteOrder label, .mainAddOrder label {
+    display: block;
+    margin-top: 10px;
+}
+
+.mainShowAllOrders .tableAllOrders {
+    margin-top: 20px;
+}
+
+.mainAddOrder .products {
+    margin-bottom: 20px;
+}
+
+.mainAddOrder .productsSection {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: row-reverse;
+}
+
+.mainAddOrder .addProductSection {
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+}
+
+.mainAddOrder .addProduct {
+    width: fit-content;
+}
+
+.mainShowAllOrders .hint {
+    font-size: 14px;
+    color: darkred;
 }

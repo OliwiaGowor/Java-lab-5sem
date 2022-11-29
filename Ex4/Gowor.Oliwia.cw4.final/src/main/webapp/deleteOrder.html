@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<!-- @author Oliwia Gowor
+ @version 4.0 --> 
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit this template
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <script type="text/javascript" src="js/ajax.js"></script>
+        <link rel="stylesheet" href="css/main.css">
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <div class = "navbar">
+            <a href="/WebLab3/showAllOrders.html"><button>Back</button></a>
+        </div>
+        <main class="mainDeleteOrder">
+            <h1>Delete order</h1>
+            <form action="deleteOrder">
+                <label for="orderNumber">Order number</label>
+                <input type="text" id="orderNumber" name="orderNumber" required>
+                <input type="submit" id="deleteOrder" class="delete" value="Delete order" />
+            </form>
+        </main>
+    </body>
+</html>
