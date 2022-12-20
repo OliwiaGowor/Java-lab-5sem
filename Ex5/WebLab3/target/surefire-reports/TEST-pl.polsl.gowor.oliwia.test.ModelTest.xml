@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="pl.polsl.gowor.oliwia.test.ModelTest" time="0.079" tests="31" errors="0" skipped="0" failures="0">
+  <properties>
+    <property name="java.runtime.name" value="OpenJDK Runtime Environment"/>
+    <property name="java.vm.version" value="18.0.2+9"/>
+    <property name="sun.boot.library.path" value="/usr/lib/apache-netbeans/jdk/lib"/>
+    <property name="maven.multiModuleProjectDirectory" value="/home/oliwia/Pulpit/Java_lab_5_sem/Ex5/WebLab3"/>
+    <property name="java.vm.vendor" value="Azul Systems, Inc."/>
+    <property name="java.vendor.url" value="http://www.azul.com/"/>
+    <property name="path.separator" value=":"/>
+    <property name="guice.disable.misplaced.annotation.check" value="true"/>
+    <property name="java.vm.name" value="OpenJDK 64-Bit Server VM"/>
+    <property name="user.country" value="PL"/>
+    <property name="sun.java.launcher" value="SUN_STANDARD"/>
+    <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
+    <property name="user.dir" value="/home/oliwia/Pulpit/Java_lab_5_sem/Ex5/WebLab3"/>
+    <property name="java.vm.compressedOopsMode" value="32-bit"/>
+    <property name="java.runtime.version" value="18.0.2+9"/>
+    <property name="os.arch" value="amd64"/>
+    <property name="java.io.tmpdir" value="/tmp"/>
+    <property name="line.separator" value="&#10;"/>
+    <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
+    <property name="os.name" value="Linux"/>
+    <property name="maven.ext.class.path" value="/usr/lib/apache-netbeans/java/maven-nblib/netbeans-eventspy.jar"/>
+    <property name="classworlds.conf" value="/usr/lib/apache-netbeans/java/maven/bin/m2.conf"/>
+    <property name="sun.jnu.encoding" value="UTF-8"/>
+    <property name="java.library.path" value="/usr/java/packages/lib:/usr/lib64:/lib64:/lib:/usr/lib"/>
+    <property name="maven.conf" value="/usr/lib/apache-netbeans/java/maven/conf"/>
+    <property name="jdk.debug" value="release"/>
+    <property name="java.class.version" value="62.0"/>
+    <property name="java.specification.name" value="Java Platform API Specification"/>
+    <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
+    <property name="os.version" value="5.15.0-56-generic"/>
+    <property name="library.jansi.path" value="/usr/lib/apache-netbeans/java/maven/lib/jansi-native"/>
+    <property name="user.home" value="/home/oliwia"/>
+    <property name="user.timezone" value="Europe/Warsaw"/>
+    <property name="file.encoding" value="UTF-8"/>
+    <property name="java.specification.version" value="18"/>
+    <property name="user.name" value="oliwia"/>
+    <property name="java.class.path" value="/usr/lib/apache-netbeans/java/maven/boot/plexus-classworlds-2.6.0.jar"/>
+    <property name="java.vm.specification.version" value="18"/>
+    <property name="sun.arch.data.model" value="64"/>
+    <property name="sun.java.command" value="org.codehaus.plexus.classworlds.launcher.Launcher -Dmaven.ext.class.path=/usr/lib/apache-netbeans/java/maven-nblib/netbeans-eventspy.jar clean install"/>
+    <property name="java.home" value="/usr/lib/apache-netbeans/jdk"/>
+    <property name="user.language" value="pl"/>
+    <property name="java.specification.vendor" value="Oracle Corporation"/>
+    <property name="java.vm.info" value="mixed mode, sharing"/>
+    <property name="java.version" value="18.0.2"/>
+    <property name="native.encoding" value="UTF-8"/>
+    <property name="java.vendor" value="Azul Systems, Inc."/>
+    <property name="maven.home" value="/usr/lib/apache-netbeans/java/maven"/>
+    <property name="file.separator" value="/"/>
+    <property name="java.version.date" value="2022-07-19"/>
+    <property name="java.vendor.url.bug" value="http://www.azul.com/support/"/>
+    <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
+    <property name="sun.cpu.endian" value="little"/>
+    <property name="java.vendor.version" value="Zulu18.32+11-CA"/>
+  </properties>
+  <testcase name="shouldThrowExceptionWhenAddedOrderisNull" classname="pl.polsl.gowor.oliwia.test.ModelTest" time="0.013"/>
+  <testcase name="shouldFindOrderWhenDateIsOnList{Date}[1]" classname="pl.polsl.gowor.oliwia.test.ModelTest" time="0.011"/>
+  <testcase name="shouldFindOrderWhenDateIsOnList{Date}[2]" classname="pl.polsl.gowor.oliwia.test.ModelTest" time="0"/>
+  <testcase name="shouldAddNewProduct{Product}[1]" classname="pl.polsl.gowor.oliwia.test.ModelTest" time="0.001"/>
+  <testcase name="shouldAddNewProduct{Product}[2]" classname="pl.polsl.gowor.oliwia.test.ModelTest" time="0"/>
+  <testcase name="shouldAddNewProduct{Product}[3]" classname="pl.polsl.gowor.oliwia.test.ModelTest" time="0"/>
+  <testcase name="shouldFindOrderWhenNumberIsOnList{String}[1]" classname="pl.polsl.gowor.oliwia.test.ModelTest" time="0.001"/>
+  <testcase name="shouldFindOrderWhenNumberIsOnList{String}[2]" classname="pl.polsl.gowor.oliwia.test.ModelTest" time="0.001"/>
+  <testcase name="shouldAddCorrectOrder{Order}[1]" classname="pl.polsl.gowor.oliwia.test.ModelTest" time="0"/>
+  <testcase name="shouldAddCorrectOrder{Order}[2]" classname="pl.polsl.gowor.oliwia.test.ModelTest" time="0"/>
+  <testcase name="shuldNotThrowOrderNotFoundException{Date}[1]" classname="pl.polsl.gowor.oliwia.test.ModelTest" time="0"/>
+  <testcase name="shuldNotThrowOrderNotFoundException{Date}[2]" classname="pl.polsl.gowor.oliwia.test.ModelTest" time="0"/>
+  <testcase name="shuldThrowOrderNotFoundException{Date}[1]" classname="pl.polsl.gowor.oliwia.test.ModelTest" time="0.001"/>
+  <testcase name="shuldThrowOrderNotFoundException{Date}[2]" classname="pl.polsl.gowor.oliwia.test.ModelTest" time="0"/>
+  <testcase name="shuldThrowOrderNotFoundException{Date}[3]" classname="pl.polsl.gowor.oliwia.test.ModelTest" time="0"/>
+  <testcase name="shouldNotAddOrderWithRepeatedNumber{Order}[1]" classname="pl.polsl.gowor.oliwia.test.ModelTest" time="0"/>
+  <testcase name="shouldNotAddOrderWithRepeatedNumber{Order}[2]" classname="pl.polsl.gowor.oliwia.test.ModelTest" time="0"/>
+  <testcase name="shouldNotAddNewProductWhenProductisNull" classname="pl.polsl.gowor.oliwia.test.ModelTest" time="0.001"/>
+  <testcase name="shouldThrowExceptionWhenOrderDateToFindIsNotOnListOrNull{Date}[1]" classname="pl.polsl.gowor.oliwia.test.ModelTest" time="0.001"/>
+  <testcase name="shouldThrowExceptionWhenOrderDateToFindIsNotOnListOrNull{Date}[2]" classname="pl.polsl.gowor.oliwia.test.ModelTest" time="0"/>
+  <testcase name="shouldThrowExceptionWhenOrderDateToFindIsNotOnListOrNull{Date}[3]" classname="pl.polsl.gowor.oliwia.test.ModelTest" time="0"/>
+  <testcase name="shouldDeleteWhenRightNumber{String}[1]" classname="pl.polsl.gowor.oliwia.test.ModelTest" time="0"/>
+  <testcase name="shouldDeleteWhenRightNumber{String}[2]" classname="pl.polsl.gowor.oliwia.test.ModelTest" time="0.001"/>
+  <testcase name="shouldThrowExceptionWhenNumberToDeleteIsNotOnListOrNull{String}[1]" classname="pl.polsl.gowor.oliwia.test.ModelTest" time="0"/>
+  <testcase name="shouldThrowExceptionWhenNumberToDeleteIsNotOnListOrNull{String}[2]" classname="pl.polsl.gowor.oliwia.test.ModelTest" time="0"/>
+  <testcase name="shouldThrowExceptionWhenNumberToDeleteIsNotOnListOrNull{String}[3]" classname="pl.polsl.gowor.oliwia.test.ModelTest" time="0.001"/>
+  <testcase name="shouldThrowExceptionWhenNumberToDeleteIsNotOnListOrNull{String}[4]" classname="pl.polsl.gowor.oliwia.test.ModelTest" time="0"/>
+  <testcase name="shouldThrowExceptionWhenOrderNumberToFindIsNotOnListOrNull{String}[1]" classname="pl.polsl.gowor.oliwia.test.ModelTest" time="0.001"/>
+  <testcase name="shouldThrowExceptionWhenOrderNumberToFindIsNotOnListOrNull{String}[2]" classname="pl.polsl.gowor.oliwia.test.ModelTest" time="0"/>
+  <testcase name="shouldThrowExceptionWhenOrderNumberToFindIsNotOnListOrNull{String}[3]" classname="pl.polsl.gowor.oliwia.test.ModelTest" time="0"/>
+  <testcase name="shouldThrowExceptionWhenOrderNumberToFindIsNotOnListOrNull{String}[4]" classname="pl.polsl.gowor.oliwia.test.ModelTest" time="0.001"/>
+</testsuite>
